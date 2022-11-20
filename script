@@ -1,0 +1,54 @@
+if game.PlaceId == 3652625463 then
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("Lifting Simulator Destroyer", "Midnight")
+
+    -- Main
+    local FarmTab = Window:NewTab("Farm")
+    local FarmSection = FarmTab:NewSection("Farming")
+
+    FarmSection:NewToggle("AutoLifting", "Auto Lifting Items", function(state)
+        if state then
+            _G.loop = true
+            while _G.loop == true do wait()
+                print("Toggle on")
+    
+                local args = {
+                    [1] = {
+                        [1] = "GainMuscle"
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))      
+            end
+        else
+            _G.loop = false
+            while _G.loop do wait()
+                print("Toggle off")
+    
+                local args = {
+                    [1] = {
+                        [1] = "GainMuscle"
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))                
+            end
+        end
+    end)
+
+    local BuySellTab = Window:NewTab("Sell")
+    local BuySellSection = BuySellTab:NewSection("Sell")
+    
+    BuySellSection:NewButton("Sell Strenght", "Sell Strenght", function()
+        print("Clicked")
+    
+        local args = {
+            [1] = {
+                [1] = "SellMuscle"
+            }
+        }
+        
+        game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+    end)
+
+end
